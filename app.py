@@ -25,13 +25,12 @@ registroVeiculo = [
     ['r3', 'ERR3J79', 73.89, 100, 'comum'],
     ['r3', 'ERP1J22', 65.89, 100, 'comum'],
     ['r3', 'BNG9J99', 110.89, 100, 'especial'],
-    ['r3', 'ABT8I78', 110.98, 100, 'comum']
+    ['r3', 'ABT8I78', 110.98, 100, 'comum'],
+    ['r3', 'multarx', 107.00, 100, 'comum'],
+    ['r3', 'multary', 102.00, 101, 'comum']
 
 ]
 #print(registroVeiculo[0][2])
-
-
-
 
 #placa = 'ADD1G78'
 #pctExcesso = 12.37
@@ -52,6 +51,18 @@ print("PLACA   - PCT      - RADAR")
 
 
 for i in range(0,len(registroVeiculo)):
-    pctExcesso = (float(registroVeiculo[i][2]) - float(registroVeiculo[i][3]))/float(registroVeiculo[i][3]) * 100
-    if registroVeiculo[i][4] == "comum" and pctExcesso > 0  : #veiculoEspecial == False
-        print(f"{registroVeiculo[i][1]}   -  {pctExcesso  :.2f}   -  {registroVeiculo[i][0]}")
+
+    velApurada = registroVeiculo[i][2]
+    
+    velPermitida = (registroVeiculo[i][3] + 7) if registroVeiculo[i][3] <=100 else registroVeiculo[i][3]
+    
+    placa = registroVeiculo[i][1]
+    codRadar = registroVeiculo[i][0]
+    tipoVeiculo = registroVeiculo[i][4]
+    pctExcesso = (float(velApurada) - float(velPermitida))/float(velPermitida) * 100
+
+    if (tipoVeiculo == "comum") and \
+       (pctExcesso > 0):
+                       #and 
+       #((velPermitida<=100) and (velApurada>(velPermitida+7))) : 
+        print(f"{placa}   -  {pctExcesso  :.2f}   -  {codRadar}")
